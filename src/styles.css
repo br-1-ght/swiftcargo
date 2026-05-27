@@ -1,0 +1,148 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-accent: var(--brand-accent);
+  --color-ink: var(--ink);
+  --font-display: "Inter", system-ui, sans-serif;
+  --shadow-elegant: 0 20px 60px -20px color-mix(in oklab, var(--ink) 35%, transparent);
+  --shadow-glow: 0 0 60px color-mix(in oklab, var(--brand) 45%, transparent);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* Brand: DHL-inspired yellow + red on white/dark gray */
+  --brand: oklch(0.88 0.18 95);            /* signature yellow */
+  --brand-foreground: oklch(0.18 0.02 270);
+  --brand-accent: oklch(0.58 0.22 27);     /* signature red */
+  --ink: oklch(0.22 0.02 270);             /* dark gray */
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.22 0.02 270);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.02 270);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.02 270);
+
+  --primary: oklch(0.22 0.02 270);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.97 0.005 270);
+  --secondary-foreground: oklch(0.22 0.02 270);
+  --muted: oklch(0.96 0.005 270);
+  --muted-foreground: oklch(0.5 0.02 270);
+  --accent: oklch(0.95 0.04 95);
+  --accent-foreground: oklch(0.22 0.02 270);
+  --destructive: oklch(0.58 0.22 27);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.92 0.01 270);
+  --input: oklch(0.94 0.01 270);
+  --ring: oklch(0.88 0.18 95);
+}
+
+.dark {
+  --brand: oklch(0.86 0.18 95);
+  --brand-foreground: oklch(0.16 0.02 270);
+  --brand-accent: oklch(0.62 0.22 27);
+  --ink: oklch(0.97 0 0);
+
+  --background: oklch(0.16 0.02 270);
+  --foreground: oklch(0.97 0 0);
+  --card: oklch(0.21 0.02 270);
+  --card-foreground: oklch(0.97 0 0);
+  --popover: oklch(0.21 0.02 270);
+  --popover-foreground: oklch(0.97 0 0);
+  --primary: oklch(0.88 0.18 95);
+  --primary-foreground: oklch(0.16 0.02 270);
+  --secondary: oklch(0.25 0.02 270);
+  --secondary-foreground: oklch(0.97 0 0);
+  --muted: oklch(0.25 0.02 270);
+  --muted-foreground: oklch(0.7 0.02 270);
+  --accent: oklch(0.3 0.04 95);
+  --accent-foreground: oklch(0.97 0 0);
+  --destructive: oklch(0.62 0.22 27);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.86 0.18 95);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-display);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { letter-spacing: -0.02em; font-weight: 700; }
+}
+
+@layer utilities {
+  .glass {
+    background: color-mix(in oklab, var(--card) 70%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
+  }
+  .brand-stripe {
+    background: linear-gradient(90deg, var(--brand) 0%, var(--brand) 60%, var(--brand-accent) 60%, var(--brand-accent) 100%);
+  }
+  .text-gradient-brand {
+    background: linear-gradient(90deg, var(--brand-accent), oklch(0.65 0.22 50));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hover-lift {
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-elegant);
+  }
+  .animate-fade-up {
+    animation: fade-up 0.6s ease-out both;
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-marquee {
+    animation: marquee 28s linear infinite;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
